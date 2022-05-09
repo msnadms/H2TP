@@ -70,7 +70,6 @@ void runServer() {
         pthread_create(&thread, &attr, (void * (*)(void *)) thread_helper, (void *) slave);
 
     }
-
 }
 
 void dispatchHTTP(SOCKET sock) {
@@ -101,6 +100,7 @@ void dispatchHTTP(SOCKET sock) {
     auto basic = HTTPFactory::makeHTTP(BASIC);
     basic->generateResponse("text/html");
     basic->writeResponse(sock);
+
 
 
 

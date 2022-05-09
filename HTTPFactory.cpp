@@ -42,16 +42,23 @@ std::string BasicHTTP::generateResponse(const char * mime){
     return buff;
 }
 
-int BasicHTTP::transmitFile(int fd, int file) {
+int BasicHTTP::transmitFile(SOCKET fd) {
     char buffer[1024];
     int n;
-    while ((n = recv(file, buffer, 1024, 0)) > 0) {
+    while ((n = (int) fread(buffer, sizeof(char), 1024, file)) > 0) {
         int s = send(fd, buffer, n, 0);
         if (s < 1) {
             return -1;
         }
     }
+    fclose(file);
     return n;
+}
+
+FILE * BasicHTTP::prepareFile(const char * path) {
+    FILE * f = fopen(path, "r");
+    file = f;
+    return f;
 }
 
 std::string AuthHTTP::generateResponse(const char * mime) {
