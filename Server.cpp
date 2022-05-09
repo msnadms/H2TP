@@ -32,7 +32,7 @@ void runServer() {
     serverIP.sin_addr.s_addr = INADDR_ANY;
     serverIP.sin_port = htons((u_short) port);
 
-    int master = (int) socket(PF_INET, SOCK_STREAM, 0);
+    SOCKET master = socket(PF_INET, SOCK_STREAM, 0);
     if (master < 0) {
         perror("socket");
         exit(-1);
@@ -101,6 +101,10 @@ void dispatchHTTP(SOCKET sock) {
     auto basic = HTTPFactory::makeHTTP(BASIC);
     basic->generateResponse("text/html");
     basic->writeResponse(sock);
+
+
+
+
 }
 
 void thread_helper(SOCKET sock) {

@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <winsock.h>
 #include <iostream>
+#include <sstream>
 #include "HTTPFactory.h"
 
 std::unique_ptr<HTTPFactory> HTTPFactory::makeHTTP(ResponseType r) {
@@ -23,19 +24,20 @@ std::unique_ptr<HTTPFactory> HTTPFactory::makeHTTP(ResponseType r) {
 }
 
 void HTTPFactory::writeResponse(SOCKET fd) const {
-    if (response) {
-        send(fd, response, (int) strlen(response), 0);
+    const char * cr = response.c_str();
+    if (cr) {
+        send(fd, cr, (int) strlen(cr), 0);
     }
 }
 
-const char * BasicHTTP::generateResponse(const char * mime){
-    const char * header = "HTTP/1.1 200 Document follows\r\n"
-                          "Server: H2TP\r\n"
-                          "Content-type: %s\r\n"
-                          "\r\n";
-    int size = (int) (strlen(header) + strlen(mime)) + 1;
-    char * buff = (char *) malloc(size);
-    sprintf(buff, header, mime);
+std::string BasicHTTP::generateResponse(const char * mime){
+    std::ostringstream oss;
+    oss << "HTTP/1.1 200 Document follows\r\n"
+        << "Server: H2TP\r\n"
+        << "Content-type: "
+        << mime
+        << "\r\n\r\n";
+    std::string buff = oss.str();
     response = buff;
     return buff;
 }
@@ -52,28 +54,31 @@ int BasicHTTP::transmitFile(int fd, int file) {
     return n;
 }
 
-const char * AuthHTTP::generateResponse(const char * mime) {
-    const char * header = "HTTP/1.1 401 Unauthorized\r\n"
-                          "WWW-Authenticate: Basic realm=\"h2tp-verify\""
-                          "\r\n\r\n";
+std::string AuthHTTP::generateResponse(const char * mime) {
+    std::ostringstream oss;
+    oss << "HTTP/1.1 401 Unauthorized\r\n"
+        << "WWW-Authenticate: Basic realm=\"h2tp-verify\""
+        << "\r\n\r\n";
+    std::string header = oss.str();
     response = header;
     return header;
 }
 
-const char * ErrHTTP::generateResponse(const char * mime) {
-    const char * header = "HTTP/1.1 404 File Not Found\r\n"
-                          "Server: H2TP\r\n"
-                          "Content-type: text/plain\r\n\r\n"
-                          "Could not find file: %s. The server returned an error.";
-    int size = (int) (strlen(header) + strlen(mime)) + 1;
-    char * buff = (char *) malloc(size);
-    sprintf(buff, header, mime);
+std::string ErrHTTP::generateResponse(const char * mime) {
+    std::ostringstream oss;
+    oss << "HTTP/1.1 404 File Not Found\r\n"
+        << "Server: H2TP\r\n"
+        << "Content-type: text/plain\r\n\r\n"
+        << "Could not find file: "
+        << mime
+        << ". The server returned an error.";
+    std::string buff = oss.str();
     response = buff;
-    return (const char *) buff;
+    return buff;
 }
 
-const char * CgiHTTP::generateResponse(const char * mime) {
-    const char * header = "HTTP/1.1 Document follows\r\n";
+std::string CgiHTTP::generateResponse(const char * mime) {
+    std::string header = "HTTP/1.1 Document follows\r\n";
     response = header;
     return header;
 }

@@ -20,31 +20,31 @@ enum ResponseType {
 
 class HTTPFactory {
 public:
-    const char * response = nullptr;
+    std::string response;
     static std::unique_ptr<HTTPFactory> makeHTTP(ResponseType);
-    virtual const char * generateResponse(const char * mime) = 0;
+    virtual std::string generateResponse(const char * mime) = 0;
     void writeResponse(SOCKET fd) const;
 };
 
 class BasicHTTP : public HTTPFactory {
 public:
-    const char * generateResponse(const char * mime) override;
+    std::string generateResponse(const char * mime) override;
     static int transmitFile(int fd, int file);
 };
 
 class AuthHTTP : public HTTPFactory {
 public:
-    const char * generateResponse(const char * mime) override;
+    std::string generateResponse(const char * mime) override;
 };
 
 class ErrHTTP : public HTTPFactory {
 public:
-    const char * generateResponse(const char * mime) override;
+    std::string generateResponse(const char * mime) override;
 };
 
 class CgiHTTP : public HTTPFactory {
 public:
-    const char * generateResponse(const char * mime) override;
+    std::string generateResponse(const char * mime) override;
 };
 
 #endif //H2TP_HTTPFACTORY_H
