@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
+cstring
+-
+cstdio
+-
+cstdlib
+-
+memory
+-
+winsock.h
+-
+
+C:/Users/mason/CLionProjects/H2TP/Server.cpp
+winsock.h
+-
+pthread.h
+-
+unistd.h
+-
+iostream
+-
+HTTPFactory.h
+C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
+
