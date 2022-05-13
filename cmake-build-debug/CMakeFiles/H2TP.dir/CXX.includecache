@@ -6,18 +6,6 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/mason/CLionProjects/H2TP/HTTPFactory.cpp
-unistd.h
--
-winsock.h
--
-iostream
--
-sstream
--
-HTTPFactory.h
-C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
-
 C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
 cstring
 -
@@ -37,12 +25,6 @@ pthread.h
 -
 unistd.h
 -
-iostream
--
-HTTPFactory.h
-C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
-
-C:/Users/mason/CLionProjects/H2TP/main.cpp
 iostream
 -
 HTTPFactory.h

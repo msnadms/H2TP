@@ -129,6 +129,12 @@
 		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Server.cpp">
 			<Option target="H2TP"/>
 		</Unit>
+		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.cpp">
+			<Option target="H2TP"/>
+		</Unit>
+		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.h">
+			<Option target="H2TP"/>
+		</Unit>
 		<Unit filename="C:/Users/mason/CLionProjects/H2TP/main.cpp">
 			<Option target="H2TP"/>
 		</Unit>

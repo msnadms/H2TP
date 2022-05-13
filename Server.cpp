@@ -9,6 +9,7 @@
 
 constexpr int port = 25469;
 constexpr int qlen = 5;
+constexpr int exists = (int) std::string::npos;
 
 void runServer();
 void thread_helper(SOCKET sock);
@@ -96,13 +97,18 @@ void dispatchHTTP(SOCKET sock) {
     }
     request[requestLength] = '\0';
     std::string ask = std::string(request);
+    std::string cutRequest = ask.substr(ask.find("GET ") + 4, ask.find("HTTP/1.1") - 5);
+
+    if (cutRequest == "/") {
+        cutRequest = "/index.html";
+    }
+    std::string filePath = "./http-root-dir" + cutRequest;
+    const char * fp = filePath.c_str();
 
     auto basic = HTTPFactory::makeHTTP(BASIC);
-    basic->generateResponse("text/html");
+    basic->generateResponse(cutRequest.c_str());
     basic->writeResponse(sock);
-
-
-
+    HTTPFactory::transmitFile(sock, fp);
 
 
 }

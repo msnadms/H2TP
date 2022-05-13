@@ -221,6 +221,30 @@ Server.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Server.cpp.s
 .PHONY : Server.cpp.s
 
+Websockets/Websocket.obj: Websockets/Websocket.cpp.obj
+.PHONY : Websockets/Websocket.obj
+
+# target to build an object file
+Websockets/Websocket.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.obj
+.PHONY : Websockets/Websocket.cpp.obj
+
+Websockets/Websocket.i: Websockets/Websocket.cpp.i
+.PHONY : Websockets/Websocket.i
+
+# target to preprocess a source file
+Websockets/Websocket.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.i
+.PHONY : Websockets/Websocket.cpp.i
+
+Websockets/Websocket.s: Websockets/Websocket.cpp.s
+.PHONY : Websockets/Websocket.s
+
+# target to generate assembly for a file
+Websockets/Websocket.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.s
+.PHONY : Websockets/Websocket.cpp.s
+
 main.obj: main.cpp.obj
 .PHONY : main.obj
 
@@ -264,6 +288,9 @@ help:
 	@echo ... Server.obj
 	@echo ... Server.i
 	@echo ... Server.s
+	@echo ... Websockets/Websocket.obj
+	@echo ... Websockets/Websocket.i
+	@echo ... Websockets/Websocket.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

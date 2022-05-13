@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/mason/CLionProjects/H2TP/HTTPFactory.cpp" "C:/Users/mason/CLionProjects/H2TP/cmake-build-debug/CMakeFiles/H2TP.dir/HTTPFactory.cpp.obj"
   "C:/Users/mason/CLionProjects/H2TP/Server.cpp" "C:/Users/mason/CLionProjects/H2TP/cmake-build-debug/CMakeFiles/H2TP.dir/Server.cpp.obj"
+  "C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.cpp" "C:/Users/mason/CLionProjects/H2TP/cmake-build-debug/CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.obj"
   "C:/Users/mason/CLionProjects/H2TP/main.cpp" "C:/Users/mason/CLionProjects/H2TP/cmake-build-debug/CMakeFiles/H2TP.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

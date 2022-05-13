@@ -31,18 +31,30 @@ void HTTPFactory::writeResponse(SOCKET fd) const {
 }
 
 std::string BasicHTTP::generateResponse(const char * mime){
+    const char * nm;
+    std::string end = strstr(mime, ".");
+    if (end == ".html") {
+        nm = "text/html";
+    } else if (end == ".txt") {
+        nm = "text/plain";
+    } else if (end == ".png") {
+        nm = "images/png";
+    } else {
+        return "ERR";
+    }
     std::ostringstream oss;
     oss << "HTTP/1.1 200 Document follows\r\n"
         << "Server: H2TP\r\n"
         << "Content-type: "
-        << mime
+        << nm
         << "\r\n\r\n";
     std::string buff = oss.str();
     response = buff;
     return buff;
 }
 
-int BasicHTTP::transmitFile(SOCKET fd) {
+int HTTPFactory::transmitFile(SOCKET fd, const char * path) {
+    FILE * file = fopen(path, "r");
     char buffer[1024];
     int n;
     while ((n = (int) fread(buffer, sizeof(char), 1024, file)) > 0) {
@@ -53,12 +65,6 @@ int BasicHTTP::transmitFile(SOCKET fd) {
     }
     fclose(file);
     return n;
-}
-
-FILE * BasicHTTP::prepareFile(const char * path) {
-    FILE * f = fopen(path, "r");
-    file = f;
-    return f;
 }
 
 std::string AuthHTTP::generateResponse(const char * mime) {
