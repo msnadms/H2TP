@@ -23,7 +23,11 @@ const uint8_t * Websocket::receiveData(SOCKET fd) {
     size_t currentSize = payload.size();
     payload.resize(currentSize + bufferSize);
     recv(fd, reinterpret_cast<char *>(&payload[currentSize]), bufferSize, 0);
-
+    obits beginning_bits = *(obits *) &payload[currentSize];
+    if (beginning_bits.rsv & r_mask) {
+        //Deal with potential negotiation later. All rsv should be zero.
+        WS_LOG.LOG(WARNING, "Reserve bits not all zero.");
+    }
     size_t cont = currentSize + 1;
     hbits mask_and_length = *(hbits *) &payload[cont];
     if (mask_and_length.mask == 0) {
@@ -33,18 +37,29 @@ const uint8_t * Websocket::receiveData(SOCKET fd) {
     }
 
     //Figure out payload length
-    uint64_t pplen = mask_and_length.length;
-    if (pplen == 126) { //use 16 bits
-        pplen = (pplen << 15) |
-                (payload[currentSize + 2] << 8) |
-                payload[currentSize + 3];
-    } else if (pplen == 127) { //use 48 bits
-
+    uint64_t payloadLength = mask_and_length.length;
+    if (payloadLength == 126) { //use 16 bits
+        payloadLength = ((uint64_t) payload[cont + 1] << 8) | ((uint64_t) payload[cont + 2]);
+    } else if (payloadLength == 127) { //use 64 bits
+        payloadLength = concatBits<uint64_t>(8, cont);
     }
+    cont += 8; //go to masking key
+    auto maskingKey = concatBits<uint32_t>(4, cont);
 
 
 
-
-
+    std::cout << payloadLength << maskingKey;
     return nullptr;
+}
+
+template <typename T>
+T Websocket::concatBits(int groups, size_t idx) {
+    T f_int = payload[idx];
+    for (int i = 1; i <= groups; i++) {
+        f_int |= ((T) payload[idx + i] << (8 * (groups - i)));
+    }
+    if (!f_int) {
+        WS_LOG.LOG(WARNING, "Length bits are zero");
+    }
+    return f_int;
 }
