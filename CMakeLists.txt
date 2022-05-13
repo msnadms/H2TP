@@ -3,7 +3,7 @@ project(H2TP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(H2TP main.cpp HTTPFactory.cpp HTTPFactory.h Server.cpp Websockets/Websocket.cpp Websockets/Websocket.h)
+add_executable(H2TP main.cpp HTTPFactory.cpp HTTPFactory.h Server.cpp Websockets/Websocket.cpp Websockets/Websocket.h Log.cpp Log.h)
 
 find_library(ws NAMES wsock32 PATHS ${PROJECT_SOURCE_DIR} NO_SYSTEM_ENVIRONMENT_PATH NO_DEFAULT_PATH)
 

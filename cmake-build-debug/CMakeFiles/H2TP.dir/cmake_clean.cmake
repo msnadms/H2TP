@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/H2TP.dir/HTTPFactory.cpp.obj"
+  "CMakeFiles/H2TP.dir/Log.cpp.obj"
   "CMakeFiles/H2TP.dir/Server.cpp.obj"
   "CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.obj"
   "CMakeFiles/H2TP.dir/main.cpp.obj"

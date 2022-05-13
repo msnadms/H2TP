@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <vector>
+#include "../Log.h"
 
 namespace Websockets {
 
@@ -19,7 +20,7 @@ class Websocket {
 
 private:
     std::vector<uint8_t> payload;
-
+    Log WS_LOG;
 public:
     Websocket();
     inline std::vector<uint8_t> getData() {

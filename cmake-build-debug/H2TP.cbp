@@ -126,6 +126,12 @@
 		<Unit filename="C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h">
 			<Option target="H2TP"/>
 		</Unit>
+		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Log.cpp">
+			<Option target="H2TP"/>
+		</Unit>
+		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Log.h">
+			<Option target="H2TP"/>
+		</Unit>
 		<Unit filename="C:/Users/mason/CLionProjects/H2TP/Server.cpp">
 			<Option target="H2TP"/>
 		</Unit>

@@ -197,6 +197,30 @@ HTTPFactory.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/HTTPFactory.cpp.s
 .PHONY : HTTPFactory.cpp.s
 
+Log.obj: Log.cpp.obj
+.PHONY : Log.obj
+
+# target to build an object file
+Log.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Log.cpp.obj
+.PHONY : Log.cpp.obj
+
+Log.i: Log.cpp.i
+.PHONY : Log.i
+
+# target to preprocess a source file
+Log.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Log.cpp.i
+.PHONY : Log.cpp.i
+
+Log.s: Log.cpp.s
+.PHONY : Log.s
+
+# target to generate assembly for a file
+Log.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\H2TP.dir\build.make CMakeFiles/H2TP.dir/Log.cpp.s
+.PHONY : Log.cpp.s
+
 Server.obj: Server.cpp.obj
 .PHONY : Server.obj
 
@@ -285,6 +309,9 @@ help:
 	@echo ... HTTPFactory.obj
 	@echo ... HTTPFactory.i
 	@echo ... HTTPFactory.s
+	@echo ... Log.obj
+	@echo ... Log.i
+	@echo ... Log.s
 	@echo ... Server.obj
 	@echo ... Server.i
 	@echo ... Server.s
