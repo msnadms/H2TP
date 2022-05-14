@@ -30,15 +30,17 @@
 
 namespace Websockets {
 
+constexpr int MaxHeaderSize = 14 * sizeof(char);
+
 struct hbits {
-    uint8_t mask : 1;
-    uint8_t length : 7;
+    unsigned int length : 7;
+    unsigned int mask : 1;
 };
 
 struct obits {
-    uint8_t fin : 1;
-    uint8_t rsv : 3;
-    uint8_t opcode : 4;
+    unsigned int opcode : 4;
+    unsigned int rsv : 3;
+    unsigned int fin : 1;
 };
 
 class Websocket {
@@ -55,7 +57,7 @@ public:
     }
 
     int sendData(const uint8_t * data);
-    const uint8_t * receiveData(SOCKET fd);
+    const uint8_t * receiveData(SOCKET fd, std::vector<uint8_t> & message);
 
 };
 
