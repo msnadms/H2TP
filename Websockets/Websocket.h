@@ -27,21 +27,9 @@
 #include <cstdint>
 #include <vector>
 #include "../Log.h"
+#include "Parsing.h"
 
 namespace Websockets {
-
-constexpr int MaxHeaderSize = 14 * sizeof(char);
-
-struct hbits {
-    unsigned int length : 7;
-    unsigned int mask : 1;
-};
-
-struct obits {
-    unsigned int opcode : 4;
-    unsigned int rsv : 3;
-    unsigned int fin : 1;
-};
 
 class Websocket {
 
@@ -57,7 +45,7 @@ public:
     }
 
     int sendData(const uint8_t * data);
-    const uint8_t * receiveData(SOCKET fd, std::vector<uint8_t> & message);
+    Opcode receiveData(SOCKET fd, std::vector<uint8_t> & message);
 
 };
 

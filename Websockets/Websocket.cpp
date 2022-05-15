@@ -7,8 +7,6 @@
 #include <iostream>
 #include "Websocket.h"
 
-constexpr int bufferSize = 16 * 1024;
-
 using namespace Websockets;
 
 Websocket::Websocket() = default;
@@ -18,7 +16,7 @@ int Websocket::sendData(const uint8_t * data) {
     return 0;
 }
 
-const uint8_t * Websocket::receiveData(SOCKET fd, std::vector<uint8_t> & message) {
+Opcode Websocket::receiveData(SOCKET fd, std::vector<uint8_t> & message) {
 
     size_t currentSize = payload.size();
     payload.resize(currentSize + bufferSize);
@@ -27,13 +25,16 @@ const uint8_t * Websocket::receiveData(SOCKET fd, std::vector<uint8_t> & message
     if (!!(beginning_bits.rsv)) {
         //Deal with potential negotiation later. All rsv should be zero.
         WS_LOG.LOG(WARNING, "Reserve bits not all zero.");
+        return NO_OPCODE;
     }
+    auto msgType = static_cast<Opcode>(beginning_bits.opcode);
     size_t cont = currentSize + 1; //keeps track of "cursor" position
     hbits mask_and_length = *(hbits *) &payload[cont];
     if ((int) mask_and_length.mask == 0) {
         //Close connection, client sent unmasked frame
         WS_LOG.LOG(ERR, "Client sent unmasked frame.");
         closesocket(fd);
+        return NO_OPCODE;
     }
     cont++;
     //Figure out payload length
@@ -50,16 +51,14 @@ const uint8_t * Websocket::receiveData(SOCKET fd, std::vector<uint8_t> & message
 
     message.clear();
     message.reserve(payloadLength);
-    int d_idx = 0, m_idx = 0;
-    for (int i = 0; i < payloadLength; i++) {
-        //must unmask data
-        m_idx = d_idx % 4;
-        message.push_back(payload[cont + i]);
+    unsigned int key_idx;
+    for (unsigned int i = 0; i < payloadLength; i++) {
+        key_idx = maskingKey >> (8 * (i % 4)); //unmask data
+        message.push_back((payload[cont + i] ^ key_idx) & lsb_mask);
     }
-    if (!beginning_bits.fin) { //If there are more frames, continue reading
-        receiveData(fd, message);
-    }
-    return &message[0];
+    std::string log_str = std::string("Received frame with opcode: ") + op_map[msgType];
+    WS_LOG.LOG(INFO, log_str.c_str());
+    return msgType;
 }
 
 template <typename T>
