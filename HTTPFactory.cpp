@@ -14,7 +14,7 @@ std::unique_ptr<HTTPFactory> HTTPFactory::makeHTTP(ResponseType r) {
         return std::make_unique<BasicHTTP>();
     } else if (r == AUTH) {
         return std::make_unique<AuthHTTP>();
-    } else if (r == ERR) {
+    } else if (r == NF) {
         return std::make_unique<ErrHTTP>();
     } else if (r == CGI) {
         return std::make_unique<CgiHTTP>();

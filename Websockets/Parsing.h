@@ -14,11 +14,6 @@ enum Opcode {
     PONG = 0xA,
     NO_OPCODE
 };
-const char * op_map[] = {"continue", "text", "binary", "close", "ping", "pong"};
-
-constexpr int bufferSize = 16 * 1024;
-
-constexpr int lsb_mask = 0xFF; //Get the 8 least significant bits of uint32_t
 
 struct hbits {
     unsigned int length : 7;

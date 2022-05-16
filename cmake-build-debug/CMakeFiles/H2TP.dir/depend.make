@@ -4,9 +4,20 @@
 CMakeFiles/H2TP.dir/HTTPFactory.cpp.obj: \
  ../HTTPFactory.cpp \
  ../HTTPFactory.h
+CMakeFiles/H2TP.dir/Log.cpp.obj: \
+ ../Log.cpp \
+ ../Log.h
 CMakeFiles/H2TP.dir/Server.cpp.obj: \
  ../HTTPFactory.h \
- ../Server.cpp
+ ../Log.h \
+ ../Server.cpp \
+ ../Websockets/Parsing.h \
+ ../Websockets/Websocket.h
+CMakeFiles/H2TP.dir/Websockets/Websocket.cpp.obj: \
+ ../Log.h \
+ ../Websockets/Parsing.h \
+ ../Websockets/Websocket.cpp \
+ ../Websockets/Websocket.h
 CMakeFiles/H2TP.dir/main.cpp.obj: \
  ../HTTPFactory.h \
  ../main.cpp

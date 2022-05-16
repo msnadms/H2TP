@@ -7,11 +7,18 @@
 #include <iostream>
 #include "Websocket.h"
 
-using namespace Websockets;
+const char * op_map[] = {"continue", "text", "binary",
+                         "", "", "", "", "",
+                         "close", "ping", "pong"};
+
+constexpr int bufferSize = 16 * 1024;
+
+constexpr int lsb_mask = 0xFF;
 
 Websocket::Websocket() = default;
 
-int Websocket::sendData(const uint8_t * data) {
+int Websocket::sendData(const uint8_t * data, Opcode op) {
+
 
     return 0;
 }
@@ -35,6 +42,11 @@ Opcode Websocket::receiveData(SOCKET fd, std::vector<uint8_t> & message) {
         WS_LOG.LOG(ERR, "Client sent unmasked frame.");
         closesocket(fd);
         return NO_OPCODE;
+    }
+    if (msgType == NO_OPCODE) {
+        //unknown opcode given to server
+        WS_LOG.LOG(WARNING, "Message has unknown opcode");
+        return msgType;
     }
     cont++;
     //Figure out payload length

@@ -18,6 +18,10 @@ memory
 winsock.h
 -
 
+C:/Users/mason/CLionProjects/H2TP/Log.h
+cstdio
+-
+
 C:/Users/mason/CLionProjects/H2TP/Server.cpp
 winsock.h
 -
@@ -29,4 +33,28 @@ iostream
 -
 HTTPFactory.h
 C:/Users/mason/CLionProjects/H2TP/HTTPFactory.h
+Websockets/Websocket.h
+C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.h
+
+C:/Users/mason/CLionProjects/H2TP/Websockets/Parsing.h
+
+C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.cpp
+cstdint
+-
+winsock.h
+-
+iostream
+-
+Websocket.h
+C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.h
+
+C:/Users/mason/CLionProjects/H2TP/Websockets/Websocket.h
+cstdint
+-
+vector
+-
+../Log.h
+C:/Users/mason/CLionProjects/H2TP/Log.h
+Parsing.h
+C:/Users/mason/CLionProjects/H2TP/Websockets/Parsing.h
 

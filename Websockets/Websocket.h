@@ -29,8 +29,6 @@
 #include "../Log.h"
 #include "Parsing.h"
 
-namespace Websockets {
-
 class Websocket {
 
 private:
@@ -44,10 +42,8 @@ public:
         return payload;
     }
 
-    int sendData(const uint8_t * data);
+    int sendData(const uint8_t * data, Opcode op);
     Opcode receiveData(SOCKET fd, std::vector<uint8_t> & message);
-
 };
 
-}
 #endif //H2TP_WEBSOCKET_H

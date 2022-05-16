@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <iostream>
 #include "HTTPFactory.h"
+#include "Websockets/Websocket.h"
 
 constexpr int port = 25469;
 constexpr int qlen = 5;

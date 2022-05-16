@@ -14,7 +14,7 @@
 enum ResponseType {
         BASIC,
         AUTH,
-        ERR,
+        NF,
         CGI
 };
 

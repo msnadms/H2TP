@@ -8,24 +8,22 @@
 #include <cstdio>
 
 enum Defcon {
-    DEBUG,
     INFO,
     WARNING,
     ERR
 };
-static const char * str_map[] = {"Debug", "Info", "Warning", "Error"};
+static const char * str_map[] = {"Info", "Warning", "Error"};
 
 class Log {
 
 private:
     const char * file_path;
-    static int logs;
     FILE * file;
 public:
     Log();
-    explicit Log(const char * path);
-    void changeFile(const char * path);
-    void LOG(Defcon d, const char * message);
+    [[maybe_unused]] explicit Log(const char * path);
+    [[maybe_unused]] void changeFile(const char * path);
+    void LOG(Defcon d, const char * message, bool debug = false);
     ~Log();
 };
 
